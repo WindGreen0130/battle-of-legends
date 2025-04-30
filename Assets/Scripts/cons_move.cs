@@ -27,19 +27,19 @@ public class cons_move : MonoBehaviour
         if(!GetComponent<Animator>().GetBool("ConsPray")&&!Constatine_skill.ride){ // 用動畫的bool偵測技能施放狀態
         if(Input.GetKey(KeyCode.A)){
             movex = -movespeed; // u
-            GetComponent<SpriteRenderer>().flipX = true; // 要翻轉角色
+            GetComponent<SpriteRenderer>().flipX = true; // 讓角色面朝正確的方向
             flip = true;
             GetComponent<Animator>().SetBool("moveing",true);// 移動動畫
             a = true;
         }
         if(Input.GetKey(KeyCode.D)){
             movex = movespeed;
-            GetComponent<SpriteRenderer>().flipX = false;
-            GetComponent<Animator>().SetBool("moveing",true);
+            GetComponent<SpriteRenderer>().flipX = false; // 讓角色面朝正確方向
+            GetComponent<Animator>().SetBool("moveing",true); // 移動動畫
             a = true;
         }
         rb.linearVelocity = new Vector2(movex,rb.linearVelocity.y);
-        if(Input.GetKey(KeyCode.W) && isGrounded){
+        if(Input.GetKey(KeyCode.W) && isGrounded){ // 踩在地上的時候才能跳躍
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpforce);
             isGrounded = false;
         }
@@ -47,8 +47,8 @@ public class cons_move : MonoBehaviour
             GetComponent<Animator>().SetBool("moveing",false);
         }
     }
-    if(Constatine_skill.ride){
-        rb.linearVelocity = new Vector2(0,0);
+    if(Constatine_skill.ride){ 
+        rb.linearVelocity = new Vector2(0,0); // 騎馬時角色不能亂跑
         if(GetComponent<SpriteRenderer>().flipX){
             transform.Translate(-10f*Time.deltaTime,0,0);
         }
